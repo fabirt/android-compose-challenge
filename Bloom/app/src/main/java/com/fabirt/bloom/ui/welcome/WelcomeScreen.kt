@@ -6,16 +6,25 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.navigate
+import androidx.navigation.compose.popUpTo
+import com.fabirt.bloom.R
+import com.fabirt.bloom.navigation.Destinations
 import com.fabirt.bloom.ui.components.StadiumShapeButton
 import com.fabirt.bloom.ui.theme.BloomTheme
 import com.fabirt.bloom.ui.theme.White
+import com.google.accompanist.insets.ProvideWindowInsets
 import com.google.accompanist.insets.systemBarsPadding
 
 @Composable
-fun WelcomeScreen() {
+fun WelcomeScreen(
+    navController: NavHostController? = null
+) {
     Scaffold(
         backgroundColor = MaterialTheme.colors.primary
     ) {
@@ -49,26 +58,28 @@ fun WelcomeScreen() {
                     contentDescription = null
                 )
                 Text(
-                    text = "Beautiful home garden solutions",
+                    text = stringResource(R.string.welcome_label),
                     textAlign = TextAlign.Center,
                     style = MaterialTheme.typography.subtitle1,
                     modifier = Modifier.padding(top = 8.dp, bottom = 40.dp)
                 )
 
                 StadiumShapeButton(
-                    text = "Create account",
+                    text = stringResource(R.string.create_account),
                     textColor = MaterialTheme.colors.onSecondary,
                     backgroundColor = MaterialTheme.colors.secondary
                 ) {
-                    // TODO
+                    navController?.navigate(Destinations.login)
                 }
                 Spacer(modifier = Modifier.height(8.dp))
 
                 StadiumShapeButton(
-                    text = "Log in",
+                    text = stringResource(R.string.log_in),
                     textColor = MaterialTheme.colors.secondary,
                 ) {
-                    // TODO
+                    navController?.navigate(Destinations.login) {
+                        popUpTo(Destinations.welcome) { inclusive = true }
+                    }
                 }
 
                 Spacer(modifier = Modifier.height(40.dp))
@@ -83,7 +94,9 @@ fun WelcomeScreen() {
 @Composable
 fun WelcomeScreenPreview() {
     BloomTheme {
-        WelcomeScreen()
+        ProvideWindowInsets {
+            WelcomeScreen()
+        }
     }
 }
 
@@ -91,6 +104,9 @@ fun WelcomeScreenPreview() {
 @Composable
 fun WelcomeScreenDarkPreview() {
     BloomTheme(darkTheme = true) {
-        WelcomeScreen()
+        ProvideWindowInsets {
+            WelcomeScreen()
+        }
     }
 }
+
