@@ -3,4 +3,10 @@
     <string name="welcome_label">Beautiful home garden solutions</string>
     <string name="create_account">Create account</string>
     <string name="log_in">Log in</string>
+    <string name="login_with_email">Login with email</string>
+    <string name="email_label">Email address</string>
+    <string name="email_hint">Enter your email</string>
+    <string name="password_label">Password (+8 characters)</string>
+    <string name="password_hint">Enter your password</string>
+    <string name="terms_and_conditions">By clicking below, you agree to our Terms of Use and consent to our Privacy Policy.</string>
 </resources>
