@@ -14,7 +14,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.navigate
 import com.fabirt.bloom.R
+import com.fabirt.bloom.navigation.Destinations
 import com.fabirt.bloom.ui.components.StadiumShapeButton
 import com.fabirt.bloom.ui.theme.BloomTheme
 import com.google.accompanist.insets.ProvideWindowInsets
@@ -85,7 +87,9 @@ fun LoginScreen(
                 text = stringResource(R.string.log_in),
                 textColor = MaterialTheme.colors.onSecondary,
                 backgroundColor = MaterialTheme.colors.secondary,
-                onClick = { /*TODO*/ }
+                onClick = {
+                    navController?.navigate(Destinations.home)
+                }
             )
         }
     }

@@ -9,6 +9,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.fabirt.bloom.navigation.Destinations
+import com.fabirt.bloom.ui.home.HomeScreen
 import com.fabirt.bloom.ui.login.LoginScreen
 import com.fabirt.bloom.ui.theme.BloomTheme
 import com.fabirt.bloom.ui.welcome.WelcomeScreen
@@ -38,6 +39,9 @@ fun BloomApp() {
                 }
                 composable(Destinations.login) {
                     LoginScreen(navController)
+                }
+                composable(Destinations.home) {
+                    HomeScreen(navController)
                 }
             }
         }
