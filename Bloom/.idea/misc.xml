@@ -13,10 +13,16 @@
         <entry key="../../../../../layout/compose-model-1615802430652.xml" value="0.22677364864864866" />
         <entry key="../../../../../layout/compose-model-1615803774946.xml" value="0.22677364864864866" />
         <entry key="../../../../../layout/compose-model-1615804228122.xml" value="0.22677364864864866" />
+        <entry key="../../../../../layout/compose-model-1615806488150.xml" value="0.22677364864864866" />
+        <entry key="app/src/main/res/drawable-night/launch_background.xml" value="0.2651282051282051" />
         <entry key="app/src/main/res/drawable/ic_dark_welcome_bg.xml" value="0.2111111111111111" />
         <entry key="app/src/main/res/drawable/ic_dark_welcome_illos.xml" value="0.2111111111111111" />
+        <entry key="app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.14583333333333334" />
+        <entry key="app/src/main/res/drawable/ic_light_logo.xml" value="0.2651282051282051" />
         <entry key="app/src/main/res/drawable/ic_light_welcome_bg.xml" value="0.2111111111111111" />
         <entry key="app/src/main/res/drawable/ic_light_welcome_illos.xml" value="0.2111111111111111" />
+        <entry key="app/src/main/res/drawable/launch_background.xml" value="0.2651282051282051" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.14583333333333334" />
       </map>
     </option>
   </component>
