@@ -5,6 +5,10 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
+import androidx.compose.material.ripple.LocalRippleTheme
+import androidx.compose.material.ripple.RippleAlpha
+import androidx.compose.material.ripple.RippleTheme
+import androidx.compose.material.ripple.RippleTheme.Companion.defaultRippleColor
 import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
 import com.fabirt.bloom.R
@@ -64,8 +68,9 @@ fun BloomTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable 
             colors = colors,
             typography = Typography,
             shapes = Shapes,
-            content = content
-        )
+        ) {
+            ProvideCustomRippleTheme(content)
+        }
     }
 }
 
@@ -106,4 +111,25 @@ fun ProvideBloomThemeData(
 
 private val LocalBloomThemeData = staticCompositionLocalOf<BloomThemeData> {
     error("No BloomThemeData provided")
+}
+
+@Composable
+fun ProvideCustomRippleTheme(
+    content: @Composable () -> Unit
+) {
+    CompositionLocalProvider(LocalRippleTheme provides CustomRippleTheme, content = content)
+}
+
+
+private object CustomRippleTheme : RippleTheme {
+    @Composable
+    override fun defaultColor(): Color = defaultRippleColor(Color.Black, lightTheme = true)
+
+    @Composable
+    override fun rippleAlpha(): RippleAlpha = RippleAlpha(
+        pressedAlpha = 0.14f,
+        focusedAlpha = 0.14f,
+        draggedAlpha = 0.14f,
+        hoveredAlpha = 0.14f
+    )
 }
