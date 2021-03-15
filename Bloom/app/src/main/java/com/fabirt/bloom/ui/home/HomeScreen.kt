@@ -1,7 +1,6 @@
 package com.fabirt.bloom.ui.home
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
@@ -22,36 +21,42 @@ fun HomeScreen(
     Scaffold(
         backgroundColor = MaterialTheme.colors.background,
         bottomBar = {
-            BottomNavigation(
-                backgroundColor = MaterialTheme.colors.primary,
+            Surface(
                 elevation = 16.dp,
-                modifier = Modifier.navigationBarsPadding()
+                color = MaterialTheme.colors.primary
             ) {
-                BottomNavigationItem(
-                    selected = true,
-                    onClick = {},
-                    icon = { Icon(Icons.Filled.Home, "") },
-                    label = { Text("Home") }
-                )
-                BottomNavigationItem(
-                    selected = false,
-                    onClick = {},
-                    icon = { Icon(Icons.Filled.Favorite, "") },
-                    label = { Text("Favorites") }
-                )
-                BottomNavigationItem(
-                    selected = false,
-                    onClick = {},
-                    icon = { Icon(Icons.Filled.Person, "") },
-                    label = { Text("Profile") }
-                )
-                BottomNavigationItem(
-                    selected = false,
-                    onClick = {},
-                    icon = { Icon(Icons.Filled.ShoppingCart, "") },
-                    label = { Text("Cart") }
-                )
+                BottomNavigation(
+                    backgroundColor = MaterialTheme.colors.primary,
+                    elevation = 0.dp,
+                    modifier = Modifier.navigationBarsPadding(),
+                ) {
+                    BottomNavigationItem(
+                        selected = true,
+                        onClick = {},
+                        icon = { Icon(Icons.Filled.Home, "") },
+                        label = { Text("Home") }
+                    )
+                    BottomNavigationItem(
+                        selected = false,
+                        onClick = {},
+                        icon = { Icon(Icons.Filled.Favorite, "") },
+                        label = { Text("Favorites") }
+                    )
+                    BottomNavigationItem(
+                        selected = false,
+                        onClick = {},
+                        icon = { Icon(Icons.Filled.Person, "") },
+                        label = { Text("Profile") }
+                    )
+                    BottomNavigationItem(
+                        selected = false,
+                        onClick = {},
+                        icon = { Icon(Icons.Filled.ShoppingCart, "") },
+                        label = { Text("Cart") }
+                    )
+                }
             }
+
         }
     ) {
         Column(Modifier.statusBarsPadding()) {
