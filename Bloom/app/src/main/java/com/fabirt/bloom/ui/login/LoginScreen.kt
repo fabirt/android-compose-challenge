@@ -1,11 +1,16 @@
 package com.fabirt.bloom.ui.login
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusOrder
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -22,6 +27,7 @@ import com.fabirt.bloom.ui.theme.BloomTheme
 import com.google.accompanist.insets.ProvideWindowInsets
 import com.google.accompanist.insets.systemBarsPadding
 
+@ExperimentalComposeUiApi
 @Composable
 fun LoginScreen(
     navController: NavHostController? = null
@@ -29,6 +35,10 @@ fun LoginScreen(
     val commonModifier = Modifier
         .padding(horizontal = 16.dp)
         .fillMaxWidth()
+
+    val emailFocusRequester = FocusRequester()
+    val passwordFocusRequester = FocusRequester()
+    val keyboardController = LocalSoftwareKeyboardController.current
 
     Scaffold(backgroundColor = MaterialTheme.colors.background) {
         Column(
@@ -51,7 +61,10 @@ fun LoginScreen(
                     keyboardType = KeyboardType.Email,
                     imeAction = ImeAction.Next
                 ),
-                modifier = commonModifier,
+                keyboardActions = KeyboardActions(
+                    onNext = { passwordFocusRequester.requestFocus() }
+                ),
+                modifier = commonModifier.focusOrder(emailFocusRequester),
                 hintText = stringResource(R.string.email_hint),
                 labelText = stringResource(R.string.email_label)
             ) {
@@ -62,8 +75,11 @@ fun LoginScreen(
                     keyboardType = KeyboardType.Password,
                     imeAction = ImeAction.Done
                 ),
+                keyboardActions = KeyboardActions(
+                    onDone = { keyboardController?.hideSoftwareKeyboard() }
+                ),
                 visualTransformation = PasswordVisualTransformation(),
-                modifier = commonModifier,
+                modifier = commonModifier.focusOrder(passwordFocusRequester),
                 hintText = stringResource(R.string.password_hint),
                 labelText = stringResource(R.string.password_label)
             ) {
@@ -95,6 +111,7 @@ fun LoginScreen(
     }
 }
 
+@ExperimentalComposeUiApi
 @Preview
 @Composable
 fun LoginScreenPreview() {
