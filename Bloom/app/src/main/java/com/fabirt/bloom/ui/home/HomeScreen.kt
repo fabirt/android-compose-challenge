@@ -1,71 +1,48 @@
 package com.fabirt.bloom.ui.home
 
-import androidx.compose.foundation.layout.Column
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.fabirt.bloom.domain.Screen
 import com.fabirt.bloom.ui.theme.BloomTheme
 import com.google.accompanist.insets.ProvideWindowInsets
-import com.google.accompanist.insets.navigationBarsPadding
-import com.google.accompanist.insets.statusBarsPadding
 
 @Composable
 fun HomeScreen(
-    navController: NavHostController? = null
+    rootNavHostController: NavHostController? = null
 ) {
+    val screens = listOf(
+        Screen.Home,
+        Screen.Favorites,
+        Screen.Profile,
+        Screen.Cart,
+    )
+
+    val navController = rememberNavController()
+
     Scaffold(
         backgroundColor = MaterialTheme.colors.background,
         bottomBar = {
-            Surface(
-                elevation = 16.dp,
-                color = MaterialTheme.colors.primary
-            ) {
-                BottomNavigation(
-                    backgroundColor = MaterialTheme.colors.primary,
-                    elevation = 0.dp,
-                    modifier = Modifier.navigationBarsPadding(),
-                ) {
-                    BottomNavigationItem(
-                        selected = true,
-                        onClick = {},
-                        icon = { Icon(Icons.Filled.Home, "") },
-                        label = { Text("Home") }
-                    )
-                    BottomNavigationItem(
-                        selected = false,
-                        onClick = {},
-                        icon = { Icon(Icons.Filled.Favorite, "") },
-                        label = { Text("Favorites") }
-                    )
-                    BottomNavigationItem(
-                        selected = false,
-                        onClick = {},
-                        icon = { Icon(Icons.Filled.Person, "") },
-                        label = { Text("Profile") }
-                    )
-                    BottomNavigationItem(
-                        selected = false,
-                        onClick = {},
-                        icon = { Icon(Icons.Filled.ShoppingCart, "") },
-                        label = { Text("Cart") }
-                    )
-                }
-            }
-
+            BottomNavigationBar(
+                items = screens,
+                navController = navController
+            )
         }
     ) {
-        Column(Modifier.statusBarsPadding()) {
-            Text(text = "Home")
+        NavHost(navController, startDestination = Screen.Home.route) {
+            composable(Screen.Home.route) { DummyContent(Screen.Home.route) }
+            composable(Screen.Favorites.route) { DummyContent(Screen.Favorites.route) }
+            composable(Screen.Profile.route) { DummyContent(Screen.Profile.route) }
+            composable(Screen.Cart.route) { DummyContent(Screen.Cart.route) }
         }
     }
 }
 
-@Preview()
+@Preview
 @Composable
 fun HomeScreenPreview() {
     BloomTheme {

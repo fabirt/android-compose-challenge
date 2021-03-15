@@ -22,7 +22,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.navigate
 import com.fabirt.bloom.R
 import com.fabirt.bloom.navigation.Destinations
-import com.fabirt.bloom.ui.components.StadiumShapeButton
+import com.fabirt.bloom.ui.common.StadiumShapeButton
 import com.fabirt.bloom.ui.theme.BloomTheme
 import com.google.accompanist.insets.ProvideWindowInsets
 import com.google.accompanist.insets.systemBarsPadding

@@ -9,4 +9,8 @@
     <string name="password_label">Password (+8 characters)</string>
     <string name="password_hint">Enter your password</string>
     <string name="terms_and_conditions">By clicking below, you agree to our Terms of Use and consent to our Privacy Policy.</string>
+    <string name="home">Home</string>
+    <string name="favorites">Favorites</string>
+    <string name="profile">Profile</string>
+    <string name="cart">Cart</string>
 </resources>
