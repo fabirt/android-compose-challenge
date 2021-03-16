@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import dev.chrisbanes.accompanist.coil.CoilImage
 import dev.chrisbanes.accompanist.glide.GlideImage
 
 @Composable
@@ -18,7 +19,7 @@ fun NetworkImage(
     contentScale: ContentScale = ContentScale.Crop,
     fadeIn: Boolean = true,
 ) {
-    GlideImage(
+    CoilImage(
         data = data,
         modifier = modifier,
         contentDescription = "My content description",

@@ -1,10 +1,9 @@
 package com.fabirt.bloom.ui.common
 
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -20,31 +19,37 @@ fun StadiumShapeButton(
     text: String,
     textColor: Color,
     backgroundColor: Color? = null,
-    onClick: () -> Unit
-) {
-    val modifier = if (backgroundColor != null) {
-        Modifier
-            .padding(horizontal = 16.dp)
-            .clip(MaterialTheme.shapes.large)
-            .ripple(onClick = onClick, color = textColor)
-            .background(color = backgroundColor)
-            .height(48.dp)
-            .fillMaxWidth()
-            .wrapContentSize(Alignment.Center)
-    } else {
-        Modifier
-            .padding(horizontal = 16.dp)
-            .clip(MaterialTheme.shapes.large)
-            .ripple(onClick = onClick, color = textColor)
-            .height(48.dp)
-            .fillMaxWidth()
-            .wrapContentSize(Alignment.Center)
+    isLoading: Boolean = false,
+    onClick: () -> Unit,
+    ) {
+    var m = Modifier
+        .padding(horizontal = 16.dp)
+        .clip(MaterialTheme.shapes.large)
+        .ripple(onClick = onClick, color = textColor)
+        .animateContentSize()
+
+    if (backgroundColor != null) {
+        m = m.background(color = backgroundColor)
     }
 
-    Text(
-        text = text,
-        style = MaterialTheme.typography.button.copy(color = textColor),
-        textAlign = TextAlign.Center,
-        modifier = modifier
-    )
+    m = m.height(48.dp)
+
+    m = if (isLoading) {
+        m.width(48.dp).padding(8.dp).wrapContentSize(Alignment.Center)
+    } else {
+        m.fillMaxWidth().wrapContentSize(Alignment.Center)
+    }
+
+    Box(m) {
+        if (isLoading)
+            CircularProgressIndicator(
+                color = MaterialTheme.colors.onSecondary,
+                strokeWidth = 3.dp
+            )
+        else Text(
+            text = text,
+            style = MaterialTheme.typography.button.copy(color = textColor),
+            textAlign = TextAlign.Center,
+        )
+    }
 }

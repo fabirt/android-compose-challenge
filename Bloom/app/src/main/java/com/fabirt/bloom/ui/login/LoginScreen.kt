@@ -4,7 +4,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -26,12 +26,17 @@ import com.fabirt.bloom.ui.common.BloomTextField
 import com.fabirt.bloom.ui.common.PreviewContent
 import com.fabirt.bloom.ui.common.StadiumShapeButton
 import com.google.accompanist.insets.systemBarsPadding
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @ExperimentalComposeUiApi
 @Composable
 fun LoginScreen(
     navController: NavHostController? = null
 ) {
+    val coroutineScope =  rememberCoroutineScope()
+    var isLoading by remember { mutableStateOf(false) }
+
     val commonModifier = Modifier
         .padding(horizontal = 16.dp)
         .fillMaxWidth()
@@ -105,8 +110,20 @@ fun LoginScreen(
                 text = stringResource(R.string.log_in),
                 textColor = MaterialTheme.colors.onSecondary,
                 backgroundColor = MaterialTheme.colors.secondary,
+                isLoading = isLoading,
                 onClick = {
-                    navController?.navigate(Destinations.home)
+                    if (!isLoading) {
+                        coroutineScope.launch {
+                            isLoading = true
+                            delay(2000)
+                            isLoading = false
+                            navController?.navigate(Destinations.home) {
+                                popUpTo(navController.graph.startDestination) {
+                                    inclusive = true
+                                }
+                            }
+                        }
+                    }
                 }
             )
         }

@@ -12,7 +12,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.navigate
-import androidx.navigation.compose.popUpTo
 import com.fabirt.bloom.R
 import com.fabirt.bloom.navigation.Destinations
 import com.fabirt.bloom.ui.common.StadiumShapeButton
@@ -77,9 +76,7 @@ fun WelcomeScreen(
                     text = stringResource(R.string.log_in),
                     textColor = MaterialTheme.colors.secondary,
                 ) {
-                    navController?.navigate(Destinations.login) {
-                        popUpTo(Destinations.welcome) { inclusive = true }
-                    }
+                    navController?.navigate(Destinations.login)
                 }
 
                 Spacer(modifier = Modifier.height(40.dp))
