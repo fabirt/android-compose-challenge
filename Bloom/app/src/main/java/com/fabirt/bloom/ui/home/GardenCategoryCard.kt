@@ -30,6 +30,7 @@ fun GardenCategoryCard(
             .size(136.dp)
             .clip(MaterialTheme.shapes.small)
             .background(MaterialTheme.colors.background)
+            .background(MaterialTheme.colors.surface)
             .clickable { },
     ) {
         Column {

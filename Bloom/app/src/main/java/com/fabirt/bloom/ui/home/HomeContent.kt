@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.fabirt.bloom.data.demoCategories
+import com.fabirt.bloom.data.demoGarden
 import com.fabirt.bloom.ui.common.PreviewContent
 import com.google.accompanist.insets.statusBarsPadding
 
@@ -40,6 +41,7 @@ fun HomeContent() {
             Spacer(Modifier.height(16.dp))
             Text(text = "Design your home garden", style = headerTextStyle, modifier = commonModifier)
             Spacer(Modifier.height(16.dp))
+            GardenItemList(data = demoGarden, modifier = commonModifier)
         }
     }
 }
