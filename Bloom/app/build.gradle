@@ -55,4 +55,5 @@ dependencies {
 
     implementation "com.google.accompanist:accompanist-insets:0.6.2"
     implementation "androidx.navigation:navigation-compose:1.0.0-alpha09"
+    implementation "dev.chrisbanes.accompanist:accompanist-glide:0.6.2"
 }

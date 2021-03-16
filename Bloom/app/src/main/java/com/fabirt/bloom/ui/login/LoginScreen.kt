@@ -22,6 +22,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.navigate
 import com.fabirt.bloom.R
 import com.fabirt.bloom.navigation.Destinations
+import com.fabirt.bloom.ui.common.BloomTextField
+import com.fabirt.bloom.ui.common.PreviewContent
 import com.fabirt.bloom.ui.common.StadiumShapeButton
 import com.fabirt.bloom.ui.theme.BloomTheme
 import com.google.accompanist.insets.ProvideWindowInsets
@@ -38,6 +40,8 @@ fun LoginScreen(
 
     val emailFocusRequester = FocusRequester()
     val passwordFocusRequester = FocusRequester()
+
+    // Experimental
     val keyboardController = LocalSoftwareKeyboardController.current
 
     Scaffold(backgroundColor = MaterialTheme.colors.background) {
@@ -56,7 +60,7 @@ fun LoginScreen(
             )
             Spacer(Modifier.height(8.dp))
 
-            LoginTextField(
+            BloomTextField(
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Email,
                     imeAction = ImeAction.Next
@@ -66,11 +70,11 @@ fun LoginScreen(
                 ),
                 modifier = commonModifier.focusOrder(emailFocusRequester),
                 hintText = stringResource(R.string.email_hint),
-                labelText = stringResource(R.string.email_label)
+                label = { Text(stringResource(R.string.email_label)) }
             ) {
-                //
+                // handle on text changed
             }
-            LoginTextField(
+            BloomTextField(
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Password,
                     imeAction = ImeAction.Done
@@ -81,9 +85,9 @@ fun LoginScreen(
                 visualTransformation = PasswordVisualTransformation(),
                 modifier = commonModifier.focusOrder(passwordFocusRequester),
                 hintText = stringResource(R.string.password_hint),
-                labelText = stringResource(R.string.password_label)
+                label = { Text(stringResource(R.string.password_label)) }
             ) {
-                //
+                // handle on text changed
             }
 
             Spacer(Modifier.height(10.dp))
@@ -115,9 +119,7 @@ fun LoginScreen(
 @Preview
 @Composable
 fun LoginScreenPreview() {
-    BloomTheme {
-        ProvideWindowInsets {
-            LoginScreen()
-        }
+    PreviewContent {
+        LoginScreen()
     }
 }

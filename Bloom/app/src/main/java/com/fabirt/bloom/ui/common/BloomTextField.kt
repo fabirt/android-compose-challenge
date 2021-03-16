@@ -1,38 +1,41 @@
-package com.fabirt.bloom.ui.login
+package com.fabirt.bloom.ui.common
 
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.foundation.text.selection.LocalTextSelectionColors
 import androidx.compose.foundation.text.selection.SelectionContainer
-import androidx.compose.foundation.text.selection.TextSelectionColors
-import androidx.compose.material.*
-import androidx.compose.runtime.*
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.OutlinedTextField
+import androidx.compose.material.Text
+import androidx.compose.material.TextFieldDefaults
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.VisualTransformation
 
 @Composable
-fun LoginTextField(
-    modifier: Modifier,
+fun BloomTextField(
+    modifier: Modifier = Modifier,
+    leadingIcon: @Composable (() -> Unit)? = null,
     visualTransformation: VisualTransformation = VisualTransformation.None,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     hintText: String,
-    labelText: String,
+    label: @Composable (() -> Unit)? = null,
     onValueChanged: (String) -> Unit
 ) {
     var value by rememberSaveable { mutableStateOf("") }
     val color = MaterialTheme.colors.onBackground
 
-    // Modifies text selection colors (by default it will take the primary color from MaterialTheme)
-    val selectionColors = rememberTextSelectionColors(MaterialTheme.colors.copy(primary = color))
-
-    CompositionLocalProvider(LocalTextSelectionColors provides selectionColors) {
+    TextSelectionColorsProvider(colors = MaterialTheme.colors.copy(primary = color)) {
         SelectionContainer {
             OutlinedTextField(
                 value = value,
-                placeholder = { Text(text = hintText) },
-                label = { Text(text = labelText) },
+                label = label,
+                placeholder =  { Text(text = hintText) },
+                leadingIcon = leadingIcon,
                 onValueChange = {
                     value = it
                     onValueChanged(it)
@@ -53,17 +56,5 @@ fun LoginTextField(
                 )
             )
         }
-    }
-}
-
-@Composable
-internal fun rememberTextSelectionColors(colors: Colors): TextSelectionColors {
-    val primaryColor = colors.primary
-
-    return remember(primaryColor) {
-        TextSelectionColors(
-            handleColor = primaryColor,
-            backgroundColor = primaryColor.copy(alpha = 0.16f),
-        )
     }
 }

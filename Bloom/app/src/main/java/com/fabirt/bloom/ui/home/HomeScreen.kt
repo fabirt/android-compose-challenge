@@ -1,15 +1,15 @@
 package com.fabirt.bloom.ui.home
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.fabirt.bloom.domain.Screen
-import com.fabirt.bloom.ui.theme.BloomTheme
-import com.google.accompanist.insets.ProvideWindowInsets
 
 @Composable
 fun HomeScreen(
@@ -32,22 +32,14 @@ fun HomeScreen(
                 navController = navController
             )
         }
-    ) {
-        NavHost(navController, startDestination = Screen.Home.route) {
-            composable(Screen.Home.route) { DummyContent(Screen.Home.route) }
-            composable(Screen.Favorites.route) { DummyContent(Screen.Favorites.route) }
-            composable(Screen.Profile.route) { DummyContent(Screen.Profile.route) }
-            composable(Screen.Cart.route) { DummyContent(Screen.Cart.route) }
-        }
-    }
-}
-
-@Preview
-@Composable
-fun HomeScreenPreview() {
-    BloomTheme {
-        ProvideWindowInsets {
-            HomeScreen()
+    ) { innerPadding ->
+        Box(modifier = Modifier.padding(innerPadding)) {
+            NavHost(navController, startDestination = Screen.Home.route) {
+                composable(Screen.Home.route) { HomeContent() }
+                composable(Screen.Favorites.route) { DummyContent(Screen.Favorites.route) }
+                composable(Screen.Profile.route) { DummyContent(Screen.Profile.route) }
+                composable(Screen.Cart.route) { DummyContent(Screen.Cart.route) }
+            }
         }
     }
 }
