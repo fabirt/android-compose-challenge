@@ -1,7 +1,7 @@
 package com.fabirt.bloom.domain
 
-data class GardenItem(
+data class Plant(
     val name: String,
     val description: String,
-    val imageUrl: String
+    val picture: String
 )

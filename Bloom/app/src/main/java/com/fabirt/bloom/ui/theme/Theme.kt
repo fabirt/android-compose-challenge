@@ -123,7 +123,7 @@ fun ProvideCustomRippleTheme(
 
 private object CustomRippleTheme : RippleTheme {
     @Composable
-    override fun defaultColor(): Color = defaultRippleColor(Color.Black, lightTheme = true)
+    override fun defaultColor(): Color = defaultRippleColor(Color.Transparent, lightTheme = true)
 
     @Composable
     override fun rippleAlpha(): RippleAlpha = RippleAlpha(

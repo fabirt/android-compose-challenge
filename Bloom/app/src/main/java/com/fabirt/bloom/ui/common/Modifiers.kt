@@ -11,8 +11,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.graphics.Color
 
+/**
+ * Configure component to receive clicks via "click" event.
+ * @param color Ripple color that will be use with the RippleTheme alpha.
+ * Pass `null` to show no ripple.
+ */
 fun Modifier.ripple(
-    color: Color,
+    color: Color?,
     onClick: () -> Unit
 ) = composed {
     Modifier.clickable(
@@ -20,7 +25,7 @@ fun Modifier.ripple(
         onClickLabel = null,
         onClick = onClick,
         role = null,
-        indication = rememberRipple(color = color),
+        indication = if (color != null) rememberRipple(color = color) else null,
         interactionSource = remember { MutableInteractionSource() }
     )
 }
