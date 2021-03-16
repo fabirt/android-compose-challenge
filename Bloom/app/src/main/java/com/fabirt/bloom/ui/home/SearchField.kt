@@ -7,6 +7,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
@@ -18,18 +19,23 @@ import com.fabirt.bloom.ui.common.BloomTextField
 fun SearchField(
     modifier: Modifier = Modifier
 ) {
+    val focusManager = LocalFocusManager.current
+
     BloomTextField(
+        modifier = modifier,
         hintText = stringResource(R.string.search),
         leadingIcon = { Icon(Icons.Rounded.Search, contentDescription = null) },
-        onValueChanged = { /*TODO*/ },
+        onValueChanged = {  },
         keyboardOptions = KeyboardOptions(
             imeAction = ImeAction.Search,
             capitalization = KeyboardCapitalization.Sentences,
             keyboardType = KeyboardType.Text
         ),
         keyboardActions = KeyboardActions(
-            onAny = {}
+            onAny = {
+                // Clear focus from TextField and close keyboard.
+                focusManager.clearFocus()
+            }
         ),
-        modifier = modifier
     )
 }

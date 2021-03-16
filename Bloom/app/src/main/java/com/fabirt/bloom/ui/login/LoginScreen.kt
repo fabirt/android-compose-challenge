@@ -25,8 +25,6 @@ import com.fabirt.bloom.navigation.Destinations
 import com.fabirt.bloom.ui.common.BloomTextField
 import com.fabirt.bloom.ui.common.PreviewContent
 import com.fabirt.bloom.ui.common.StadiumShapeButton
-import com.fabirt.bloom.ui.theme.BloomTheme
-import com.google.accompanist.insets.ProvideWindowInsets
 import com.google.accompanist.insets.systemBarsPadding
 
 @ExperimentalComposeUiApi

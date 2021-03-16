@@ -33,6 +33,7 @@ fun BloomTextField(
         SelectionContainer {
             OutlinedTextField(
                 value = value,
+                modifier = modifier,
                 label = label,
                 placeholder =  { Text(text = hintText) },
                 leadingIcon = leadingIcon,
@@ -46,7 +47,6 @@ fun BloomTextField(
                     color = color
                 ),
                 keyboardActions = keyboardActions,
-                modifier = modifier,
                 colors = TextFieldDefaults.outlinedTextFieldColors(
                     focusedBorderColor = color,
                     unfocusedBorderColor = color,
