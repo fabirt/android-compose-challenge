@@ -13,7 +13,9 @@ import androidx.compose.ui.unit.dp
 import com.fabirt.bloom.data.demoCategories
 import com.fabirt.bloom.data.demoPlants
 import com.fabirt.bloom.ui.common.PreviewContent
+import com.google.accompanist.insets.LocalWindowInsets
 import com.google.accompanist.insets.statusBarsPadding
+import com.google.accompanist.insets.toPaddingValues
 
 @Composable
 fun HomeContent() {
@@ -25,24 +27,39 @@ fun HomeContent() {
         color = MaterialTheme.colors.onBackground
     )
 
+    val imeiPadding = LocalWindowInsets.current.ime.toPaddingValues().calculateBottomPadding()
+    val navPadding = LocalWindowInsets.current.navigationBars.toPaddingValues().calculateBottomPadding()
+    val bottomPadding = if (imeiPadding > navPadding) {
+        imeiPadding - navPadding
+    } else 0.dp
+
     Scaffold {
         Column(
             Modifier
                 .fillMaxSize()
-                .verticalScroll(rememberScrollState())
                 .statusBarsPadding()
-                .padding(bottom = 16.dp)
         ) {
             Spacer(Modifier.height(24.dp))
             SearchField(modifier = commonModifier)
-            Spacer(Modifier.height(16.dp))
-            Text(text = "Browse themes", style = headerTextStyle, modifier = commonModifier)
-            Spacer(Modifier.height(16.dp))
-            GardenCategoryList(data = demoCategories)
-            Spacer(Modifier.height(16.dp))
-            Text(text = "Design your home garden", style = headerTextStyle, modifier = commonModifier)
-            Spacer(Modifier.height(16.dp))
-            PlantListView(data = demoPlants, modifier = commonModifier)
+            Column(
+                Modifier
+                    .fillMaxSize()
+                    .verticalScroll(rememberScrollState())
+                    .padding(vertical = 16.dp)
+                    .padding(bottom = bottomPadding)
+            ) {
+                Text(text = "Browse themes", style = headerTextStyle, modifier = commonModifier)
+                Spacer(Modifier.height(16.dp))
+                GardenCategoryList(data = demoCategories)
+                Spacer(Modifier.height(16.dp))
+                Text(
+                    text = "Design your home garden",
+                    style = headerTextStyle,
+                    modifier = commonModifier
+                )
+                Spacer(Modifier.height(16.dp))
+                PlantListView(data = demoPlants, modifier = commonModifier)
+            }
         }
     }
 }

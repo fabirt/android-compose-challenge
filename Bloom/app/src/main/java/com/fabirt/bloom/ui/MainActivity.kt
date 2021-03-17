@@ -15,9 +15,11 @@ import com.fabirt.bloom.ui.home.HomeScreen
 import com.fabirt.bloom.ui.login.LoginScreen
 import com.fabirt.bloom.ui.theme.BloomTheme
 import com.fabirt.bloom.ui.welcome.WelcomeScreen
+import com.google.accompanist.insets.ExperimentalAnimatedInsets
 import com.google.accompanist.insets.ProvideWindowInsets
 
 class MainActivity : ComponentActivity() {
+    @ExperimentalAnimatedInsets
     @ExperimentalComposeUiApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,13 +33,14 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+@ExperimentalAnimatedInsets
 @ExperimentalComposeUiApi
 @Composable
 fun BloomApp() {
     val navController = rememberNavController()
 
     BloomTheme {
-        ProvideWindowInsets {
+        ProvideWindowInsets(windowInsetsAnimationsEnabled = true) {
             NavHost(navController, startDestination = Destinations.welcome) {
                 composable(Destinations.welcome) {
                     WelcomeScreen(navController)
