@@ -25,6 +25,7 @@ import com.fabirt.bloom.navigation.Destinations
 import com.fabirt.bloom.ui.common.BloomTextField
 import com.fabirt.bloom.ui.common.PreviewContent
 import com.fabirt.bloom.ui.common.StadiumShapeButton
+import com.fabirt.bloom.ui.common.keyboardAware
 import com.google.accompanist.insets.systemBarsPadding
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -51,7 +52,8 @@ fun LoginScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .systemBarsPadding(),
+                .systemBarsPadding()
+                .keyboardAware(),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {

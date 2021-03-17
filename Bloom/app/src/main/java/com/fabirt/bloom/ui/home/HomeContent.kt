@@ -2,7 +2,6 @@ package com.fabirt.bloom.ui.home
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
@@ -13,9 +12,8 @@ import androidx.compose.ui.unit.dp
 import com.fabirt.bloom.data.demoCategories
 import com.fabirt.bloom.data.demoPlants
 import com.fabirt.bloom.ui.common.PreviewContent
-import com.google.accompanist.insets.LocalWindowInsets
+import com.fabirt.bloom.ui.common.keyboardAwareScroll
 import com.google.accompanist.insets.statusBarsPadding
-import com.google.accompanist.insets.toPaddingValues
 
 @Composable
 fun HomeContent() {
@@ -26,12 +24,6 @@ fun HomeContent() {
     val headerTextStyle = MaterialTheme.typography.h1.copy(
         color = MaterialTheme.colors.onBackground
     )
-
-    val imeiPadding = LocalWindowInsets.current.ime.toPaddingValues().calculateBottomPadding()
-    val navPadding = LocalWindowInsets.current.navigationBars.toPaddingValues().calculateBottomPadding()
-    val bottomPadding = if (imeiPadding > navPadding) {
-        imeiPadding - navPadding
-    } else 0.dp
 
     Scaffold {
         Column(
@@ -44,9 +36,8 @@ fun HomeContent() {
             Column(
                 Modifier
                     .fillMaxSize()
-                    .verticalScroll(rememberScrollState())
+                    .keyboardAwareScroll(rememberScrollState())
                     .padding(vertical = 16.dp)
-                    .padding(bottom = bottomPadding)
             ) {
                 Text(text = "Browse themes", style = headerTextStyle, modifier = commonModifier)
                 Spacer(Modifier.height(16.dp))
